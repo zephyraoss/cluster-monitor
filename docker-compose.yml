@@ -1,0 +1,12 @@
+services:
+  cluster-monitor:
+    build: .
+    container_name: cluster-monitor
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${KUBECONFIG:-~/.kube/config}:/root/.kube/config:ro
+    environment:
+      - KUBECONFIG=/root/.kube/config
+      - PORT=3000
+    restart: unless-stopped
